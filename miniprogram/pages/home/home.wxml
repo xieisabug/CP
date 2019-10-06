@@ -1,0 +1,13 @@
+<!--miniprogram/pages/home/home.wxml-->
+<view wx:if="{{!logged}}">
+    <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">登录</button>
+</view>
+<view wx:if="{{logged}}">
+    <view class="top-bar">
+        <image src="{{avatarUrl}}" class="user-head"></image>
+        <view class="nickname">{{nickName}}</view>
+    </view>
+    <view>
+        <button bindtap="handleBindCp">绑定cp</button>
+    </view>
+</view>

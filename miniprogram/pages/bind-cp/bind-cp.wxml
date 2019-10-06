@@ -1,0 +1,6 @@
+<!--miniprogram/pages/bind-cp/bind-cp.wxml-->
+<view>
+    <text>1分钟之内有效</text>
+    <button open-type="share">分享给对方</button>
+</view>
+
