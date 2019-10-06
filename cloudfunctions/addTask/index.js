@@ -25,7 +25,7 @@ exports.main = async (event, context) => {
                 toOpenId,
                 name: event.name,
                 rewardList: event.rewardList,
-                status: 0, // 0 待确认， 1进行中， 2已完成
+                status: 0, // 0 待确认， 1进行中， 2已完成， 3已放弃， 4被取消
                 createDate: new Date()
             }
         });

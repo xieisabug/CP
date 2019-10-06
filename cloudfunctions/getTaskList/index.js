@@ -7,10 +7,17 @@ cloud.init()
 exports.main = async (event, context) => {
     const wxContext = cloud.getWXContext()
 
+    const db = cloud.database();
+    const _ = db.command;
+
+    const taskList = await db.collection("taskList").where(_.or([
+        _.and([{ toOpenId: wxContext.OPENID }, { status: 0 }]),
+        _.and([{ toOpenId: wxContext.OPENID }, { status: 1 }]),
+        _.and([{ fromOpenId: wxContext.OPENID }, { status: 0 }]),
+        _.and([{ fromOpenId: wxContext.OPENID }, { status: 1 }]),
+    ])).get();
+
     return {
-        event,
-        openid: wxContext.OPENID,
-        appid: wxContext.APPID,
-        unionid: wxContext.UNIONID,
+        taskList: taskList.data
     }
 }

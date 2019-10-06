@@ -1,16 +1,21 @@
 <!--miniprogram/pages/home/home.wxml-->
+<wxs src="./home.wxs" module="tools" />
+
 <view wx:if="{{!logged}}">
     <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">登录</button>
 </view>
-<view wx:if="{{logged}}">
+<view wx:if="{{logged}}" class="page-container">
     <view class="top-bar">
         <image src="{{avatarUrl}}" class="user-head"></image>
         <view class="nickname">{{nickName}}</view>
     </view>
-    <view>
+    <view class="task-list">
         <view wx:if="{{!loadCpInfo}}">加载中</view>
         <button bindtap="handleBindCp" wx:if="{{loadCpInfo && !cpInfo}}">绑定cp</button>
-        <view wx:if="{{loadCpInfo && cpInfo}}"></view>
+        <view wx:if="{{loadCpInfo && cpInfo}}" class="task-item" wx:for="{{taskList}}" wx:for-item="task" wx:key="{{task._id}}" data-task="{{task}}" bindtap="handleTaskClick">
+            <view>{{task.name}}</view>
+            <view>{{tools.getTaskStatus(task)}}</view>
+        </view>
     </view>
 
     <view wx:if="{{loadCpInfo && cpInfo}}" class="add-button" bindtap="handleAdd">新增</view>

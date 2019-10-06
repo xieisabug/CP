@@ -1,0 +1,13 @@
+
+var getTaskStatus = function(task) {
+    switch(task.status) {
+        case 0:
+            return "等待接受";
+        case 1:
+            return "进行中";
+        default:
+            return "";
+    }
+}
+
+module.exports.getTaskStatus = getTaskStatus;

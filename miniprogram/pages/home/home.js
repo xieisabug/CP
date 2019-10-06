@@ -5,12 +5,14 @@ Page({
 
     data: {
         logged: false,
-        loadCpInfo: false
+        loadCpInfo: false,
+        taskList: []
     },
 
     onLoad: function (options) {
         this.getOpenid()
-            .then(this.getCpInfo);
+            .then(this.getCpInfo)
+            .then(this.getTaskList);
 
         wx.getSetting({
             success: res => {
@@ -84,7 +86,23 @@ Page({
     },
 
     getTaskList() {
-
+        return new Promise((resolve) => {
+            // 调用云函数
+            wx.cloud.callFunction({
+                name: 'getTaskList',
+                data: {},
+                success: res => {
+                    console.log('[云函数] [getTaskList] ', res.result);
+                    this.setData({
+                        taskList: res.result.taskList
+                    });
+                    resolve();
+                },
+                fail: err => {
+                    console.error('[云函数] [getTaskList] 调用失败', err)
+                }
+            })
+        })
     },
 
     handleBindCp() {
@@ -96,5 +114,99 @@ Page({
         wx.navigateTo({
             url: '/pages/add-task/add-task',
         })
+    },
+    handleTaskClick(e) {
+        console.log(e);
+        const task = e.currentTarget.dataset.task;
+
+        if (task.fromOpenId === app.globalData.openid) {
+            if (task.status === 0) {
+                wx.showModal({
+                    title: '确认',
+                    content: '是否删除本任务？',
+                    success: (res) => {
+                        if (res.confirm) {
+                            wx.cloud.callFunction({
+                                name: 'updateTask',
+                                data: { id: task._id, status: 4 },
+                                success: res => {
+                                    console.log('[云函数] [updateTask] ', res.result);
+                                },
+                                fail: err => {
+                                    console.error('[云函数] [getTaskList] 调用失败', err)
+                                }
+                            })
+                        } else if (res.cancel) {
+                            console.log('用户点击取消')
+                        }
+                    }
+                })
+            } else if (task.status === 1) {
+                wx.showModal({
+                    title: '确认',
+                    content: '确认本任务已完成？',
+                    success: (res) => {
+                        if (res.confirm) {
+                            wx.cloud.callFunction({
+                                name: 'updateTask',
+                                data: { id: task._id, status: 2 },
+                                success: res => {
+                                    console.log('[云函数] [updateTask] ', res.result);
+                                },
+                                fail: err => {
+                                    console.error('[云函数] [getTaskList] 调用失败', err)
+                                }
+                            })
+                        } else if (res.cancel) {
+                            console.log('用户点击取消')
+                        }
+                    }
+                })
+            }
+        } else if (task.toOpenId === app.globalData.openid) {
+            if (task.status === 0) {
+                wx.showModal({
+                    title: '确认',
+                    content: '是否接受本任务？',
+                    success: (res) => {
+                        if (res.confirm) {
+                            wx.cloud.callFunction({
+                                name: 'updateTask',
+                                data: { id: task._id, status: 1 },
+                                success: res => {
+                                    console.log('[云函数] [updateTask] ', res.result);
+                                },
+                                fail: err => {
+                                    console.error('[云函数] [getTaskList] 调用失败', err)
+                                }
+                            })
+                        } else if (res.cancel) {
+                            console.log('用户点击取消')
+                        }
+                    }
+                })
+            } else if (task.status === 1) {
+                wx.showModal({
+                    title: '确认',
+                    content: '是否放弃本任务？',
+                    success: (res) => {
+                        if (res.confirm) {
+                            wx.cloud.callFunction({
+                                name: 'updateTask',
+                                data: { id: task._id, status: 3 },
+                                success: res => {
+                                    console.log('[云函数] [updateTask] ', res.result);
+                                },
+                                fail: err => {
+                                    console.error('[云函数] [getTaskList] 调用失败', err)
+                                }
+                            })
+                        } else if (res.cancel) {
+                            console.log('用户点击取消')
+                        }
+                    }
+                })
+            }
+        }
     }
 })

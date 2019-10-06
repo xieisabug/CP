@@ -1,14 +1,37 @@
 /* miniprogram/pages/home/home.wxss */
 page {
     background: white;
+    height: 100%;
+}
+
+.page-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .top-bar {
     height: 100rpx;
+    flex: 0 0 100rpx;
     display: flex;
     align-items: center;
     padding: 0 40rpx;
     border-bottom: 1rpx solid #ccc;
+}
+
+.task-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+.task-item {
+    flex: 0 0 150rpx;
+    border-bottom: 1rpx solid #ccc;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .user-head {
@@ -22,8 +45,8 @@ page {
 }
 
 .add-button {
-    width: 100rpx;
-    height: 100rpx;
+    width: 150rpx;
+    height: 150rpx;
     position: absolute;
     bottom: 40rpx;
     right: 40rpx;
@@ -31,5 +54,6 @@ page {
     background: white;
     border: 1rpx solid #ccc;
     text-align: center;
-    line-height: 100rpx;
+    line-height: 150rpx;
+    opacity: 0.8;
 }
