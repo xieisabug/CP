@@ -8,6 +8,10 @@
         <view class="nickname">{{nickName}}</view>
     </view>
     <view>
-        <button bindtap="handleBindCp">绑定cp</button>
+        <view wx:if="{{!loadCpInfo}}">加载中</view>
+        <button bindtap="handleBindCp" wx:if="{{loadCpInfo && !cpInfo}}">绑定cp</button>
+        <view wx:if="{{loadCpInfo && cpInfo}}"></view>
     </view>
+
+    <view wx:if="{{loadCpInfo && cpInfo}}" class="add-button" bindtap="handleAdd">新增</view>
 </view>

@@ -20,3 +20,16 @@ page {
 .nickname {
     font-size: 30rpx;
 }
+
+.add-button {
+    width: 100rpx;
+    height: 100rpx;
+    position: absolute;
+    bottom: 40rpx;
+    right: 40rpx;
+    border-radius: 50%;
+    background: white;
+    border: 1rpx solid #ccc;
+    text-align: center;
+    line-height: 100rpx;
+}

@@ -4,7 +4,8 @@ const app = getApp()
 Page({
 
     data: {
-        logged: false
+        logged: false,
+        loadCpInfo: false
     },
 
     onLoad: function (options) {
@@ -70,7 +71,8 @@ Page({
                 success: res => {
                     console.log('[云函数] [getCpInfo] ', res.result);
                     this.setData({
-                        cpInfo: res.result
+                        cpInfo: res.result,
+                        loadCpInfo: true
                     });
                     resolve();
                 },
@@ -81,9 +83,18 @@ Page({
         })
     },
 
+    getTaskList() {
+
+    },
+
     handleBindCp() {
         wx.navigateTo({
             url: '/pages/bind-cp/bind-cp',
+        })
+    },
+    handleAdd() {
+        wx.navigateTo({
+            url: '/pages/add-task/add-task',
         })
     }
 })

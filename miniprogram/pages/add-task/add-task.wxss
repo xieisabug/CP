@@ -1,0 +1,27 @@
+/* miniprogram/pages/add-task/add-task.wxss */
+page {
+    background: white;
+}
+input {
+    border: 1rpx solid #ccc;
+    padding: 10rpx;
+    margin: 10rpx;
+    background: white;
+    border-radius: 10rpx;
+}
+
+.add-reward-button {
+    margin-bottom: 140rpx;
+    background: white;
+}
+
+.confirm-button {
+    position: fixed;
+    bottom: 0;
+    height: 100rpx;
+    width: 100%;
+    background: white;
+    border-top: 1rpx solid #ccc;
+    line-height: 100rpx;
+    font-size: 30rpx;
+}

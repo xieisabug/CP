@@ -32,7 +32,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -52,6 +52,13 @@
 					"name": "pages/bind-cp/bind-cp",
 					"pathName": "pages/bind-cp/bind-cp",
 					"query": "id=onPnt0B2UcIiMwmSig7EnUnxfnOI&date=1570363095511",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/add-task/add-task",
+					"pathName": "pages/add-task/add-task",
+					"query": "",
 					"scene": null
 				}
 			]
