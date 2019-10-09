@@ -9,6 +9,7 @@
         <image src="{{avatarUrl}}" class="user-head"></image>
         <view class="nickname">{{nickName}}</view>
         <view class="reward-bag" bindtap="handleGoRewardBag">奖励背包</view>
+        <view class="reward-bag" bindtap="handleGoHistory">历史记录</view>
     </view>
     <view class="task-list">
         <view wx:if="{{!loadCpInfo}}">加载中</view>

@@ -1,0 +1,7 @@
+<!--miniprogram/pages/history/history.wxml-->
+<view wx:for="{{historyList}}" wx:if="{{historyList.length}}" class="history-item">
+    <view>{{item.name}}</view>
+    <view>{{item.createDate}}</view>
+</view>
+
+<view wx:if="{{!historyList.length}}">暂无历史记录</view>

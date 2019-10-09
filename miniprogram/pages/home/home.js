@@ -234,5 +234,10 @@ Page({
         wx.navigateTo({
             url: '/pages/reward-bag/reward-bag'
         })
+    },
+    handleGoHistory() {
+        wx.navigateTo({
+            url: '/pages/history/history',
+        })
     }
 })
