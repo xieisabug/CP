@@ -1,0 +1,9 @@
+<!--miniprogram/pages/reward-bag/reward-bag.wxml-->
+<form wx:if="{{rewardList.length !== 0}}" wx:for="{{rewardList}}" wx:key="{{item._id}}" report-submit="true" bindsubmit="handleClickReward" data-reward="{{item}}">
+    <button class="reward-item" form-type="submit">
+        <view>{{item.name}}</view>
+    </button>
+</form>
+
+
+<view wx:if="{{rewardList.length === 0}}">暂无奖励</view>

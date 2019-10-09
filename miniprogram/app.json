@@ -1,21 +1,10 @@
 {
     "pages": [
-        "pages/index/index",
-        "pages/userConsole/userConsole",
-        "pages/storageConsole/storageConsole",
-        "pages/databaseGuide/databaseGuide",
-        "pages/addFunction/addFunction",
-        "pages/deployFunctions/deployFunctions",
-        "pages/chooseLib/chooseLib",
-        "pages/openapi/openapi",
-        "pages/openapi/serverapi/serverapi",
-        "pages/openapi/callback/callback",
-        "pages/openapi/cloudid/cloudid",
-        "pages/im/im",
-        "pages/im/room/room",
         "pages/home/home",
         "pages/bind-cp/bind-cp",
-        "pages/add-task/add-task"
+        "pages/add-task/add-task",
+        "pages/reward-bag/reward-bag",
+        "pages/history/history"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",

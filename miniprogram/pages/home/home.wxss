@@ -32,6 +32,7 @@ page {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 40rpx;
 }
 
 .user-head {
@@ -56,4 +57,13 @@ page {
     text-align: center;
     line-height: 150rpx;
     opacity: 0.8;
+}
+
+.reward-bag {
+    font-size: 30rpx;
+    margin-left: 30rpx;
+    background: rgb(244, 177, 178);
+    color: white;
+    padding: 10rpx;
+    border-radius: 5rpx;
 }

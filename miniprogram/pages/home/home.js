@@ -10,9 +10,9 @@ Page({
     },
 
     onLoad: function (options) {
+        
         this.getOpenid()
-            .then(this.getCpInfo)
-            .then(this.getTaskList);
+            .then(this.getCpInfo);
 
         wx.getSetting({
             success: res => {
@@ -32,6 +32,23 @@ Page({
                 }
             }
         })
+    },
+
+    onShow() {
+        wx.showLoading({
+            title: '',
+        })
+        this.getTaskList()
+            .then(() => {
+                wx.hideLoading()
+            })
+    },
+
+    onPullDownRefresh() {
+        this.getTaskList()
+            .then(() => {
+                wx.stopPullDownRefresh()
+            })
     },
 
     onGetUserInfo(e) {
@@ -73,7 +90,7 @@ Page({
                 success: res => {
                     console.log('[云函数] [getCpInfo] ', res.result);
                     this.setData({
-                        cpInfo: res.result,
+                        cpInfo: res.result.cpInfo,
                         loadCpInfo: true
                     });
                     resolve();
@@ -131,9 +148,10 @@ Page({
                                 data: { id: task._id, status: 4 },
                                 success: res => {
                                     console.log('[云函数] [updateTask] ', res.result);
+                                    this.getTaskList();
                                 },
                                 fail: err => {
-                                    console.error('[云函数] [getTaskList] 调用失败', err)
+                                    console.error('[云函数] [updateTask] 调用失败', err)
                                 }
                             })
                         } else if (res.cancel) {
@@ -148,13 +166,14 @@ Page({
                     success: (res) => {
                         if (res.confirm) {
                             wx.cloud.callFunction({
-                                name: 'updateTask',
-                                data: { id: task._id, status: 2 },
+                                name: 'finishTask',
+                                data: { id: task._id },
                                 success: res => {
-                                    console.log('[云函数] [updateTask] ', res.result);
+                                    console.log('[云函数] [finishTask] ', res.result);
+                                    this.getTaskList();
                                 },
                                 fail: err => {
-                                    console.error('[云函数] [getTaskList] 调用失败', err)
+                                    console.error('[云函数] [finishTask] 调用失败', err)
                                 }
                             })
                         } else if (res.cancel) {
@@ -175,9 +194,10 @@ Page({
                                 data: { id: task._id, status: 1 },
                                 success: res => {
                                     console.log('[云函数] [updateTask] ', res.result);
+                                    this.getTaskList();
                                 },
                                 fail: err => {
-                                    console.error('[云函数] [getTaskList] 调用失败', err)
+                                    console.error('[云函数] [updateTask] 调用失败', err)
                                 }
                             })
                         } else if (res.cancel) {
@@ -196,9 +216,10 @@ Page({
                                 data: { id: task._id, status: 3 },
                                 success: res => {
                                     console.log('[云函数] [updateTask] ', res.result);
+                                    this.getTaskList();
                                 },
                                 fail: err => {
-                                    console.error('[云函数] [getTaskList] 调用失败', err)
+                                    console.error('[云函数] [updateTask] 调用失败', err)
                                 }
                             })
                         } else if (res.cancel) {
@@ -208,5 +229,10 @@ Page({
                 })
             }
         }
+    },
+    handleGoRewardBag() {
+        wx.navigateTo({
+            url: '/pages/reward-bag/reward-bag'
+        })
     }
 })

@@ -11,10 +11,10 @@ exports.main = async (event, context) => {
     const _ = db.command;
 
     const taskList = await db.collection("taskList").where(_.or([
-        _.and([{ toOpenId: wxContext.OPENID }, { status: 0 }]),
-        _.and([{ toOpenId: wxContext.OPENID }, { status: 1 }]),
-        _.and([{ fromOpenId: wxContext.OPENID }, { status: 0 }]),
-        _.and([{ fromOpenId: wxContext.OPENID }, { status: 1 }]),
+        { toOpenId: wxContext.OPENID, status: 0 },
+        { toOpenId: wxContext.OPENID, status: 1 },
+        { fromOpenId: wxContext.OPENID, status: 0 },
+        { fromOpenId: wxContext.OPENID, status: 1 },
     ])).get();
 
     return {

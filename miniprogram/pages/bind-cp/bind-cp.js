@@ -26,40 +26,43 @@ Page({
         // })
         const {id, date} = options;
 
-        if (id && date && (new Date().getTime() - parseInt(date) > 60000)) {
-            wx.showModal({
-                title: '超过时间了',
-                content: '只能在一分钟之内点击，请重新分享',
-            });
-        } else {
-            wx.cloud.callFunction({
-                name: "bindCp",
-                data: { user1: id },
-                success: res => {
-                    console.log('[云函数] [bindCp]: ', res.result);
-                    if (res.result.success) {
-                        wx.showModal({
-                            title: '恭喜',
-                            content: "绑定成功",
-                            showCancel: false,
-                            success: () =>{
-                                wx.reLaunch({
-                                    url: '/pages/home/home',
-                                });
-                            }
-                        })
-                    } else {
-                        wx.showModal({
-                            title: '提示',
-                            content: res.result.message,
-                            showCancel: false
-                        })
+        if (id && date) {
+            if ((new Date().getTime() - parseInt(date) < 60000)) {
+                wx.cloud.callFunction({
+                    name: "bindCp",
+                    data: { user1: id },
+                    success: res => {
+                        console.log('[云函数] [bindCp]: ', res.result);
+                        if (res.result.success) { 
+                            wx.showModal({
+                                title: '恭喜',
+                                content: "绑定成功",
+                                showCancel: false,
+                                success: () => {
+                                    wx.reLaunch({
+                                        url: '/pages/home/home',
+                                    });
+                                }
+                            })
+                        } else {
+                            wx.showModal({
+                                title: '提示',
+                                content: res.result.message,
+                                showCancel: false
+                            })
+                        }
+                    },
+                    fail: err => {
+                        console.error(err)
                     }
-                },
-                fail: err => {
-                    console.error(err)
-                }
-            })
+                })
+            } else {
+                wx.showModal({
+                    title: '超过时间了',
+                    content: '只能在一分钟之内点击，请重新分享',
+                });
+            }
+            
         }
     },
 

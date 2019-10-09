@@ -5,8 +5,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-        name: "123",
-        rewardList: ["4"]
+        name: "",
+        rewardList: [""]
     },
 
     /**
@@ -39,6 +39,19 @@ Page({
     },
 
     handleConfirmTask() {
+        if (this.data.name.length === 0) {
+            wx.showModal({
+                title: '提示',
+                content: '请填写任务名称',
+                showCancel: false
+            });
+            return;
+        }
+
+        wx.showLoading({
+            title: '',
+        });
+
         wx.cloud.callFunction({
             name: 'addTask',
             data: {
@@ -46,6 +59,7 @@ Page({
                 rewardList: this.data.rewardList
             },
             success: res => {
+                wx.hideLoading();
                 console.log('[云函数] [addTask] ', res.result);
                 if (res.result.success) {
                     wx.showModal({
@@ -61,6 +75,7 @@ Page({
                 }
             },
             fail: err => {
+                wx.hideLoading();
                 console.error('[云函数] [addTask] 调用失败', err)
             }
         })
