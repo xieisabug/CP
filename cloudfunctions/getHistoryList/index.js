@@ -13,14 +13,11 @@ exports.main = async (event, context) => {
     const db = cloud.database();
     const _ = db.command;
 
-    const taskList = await db.collection("taskList").where(_.or([
-        { toOpenId: wxContext.OPENID, status: 0 },
-        { toOpenId: wxContext.OPENID, status: 1 },
-        { fromOpenId: wxContext.OPENID, status: 0 },
-        { fromOpenId: wxContext.OPENID, status: 1 },
-    ])).get();
+    const historyList = await db.collection("history").where({
+        openId: wxContext.OPENID
+    }).get();
 
     return {
-        taskList: taskList.data
+        historyList: historyList.data
     }
 }

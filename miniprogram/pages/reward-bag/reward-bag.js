@@ -15,6 +15,10 @@ Page({
         this.getRewardList();
     },
 
+    onPullDownRefresh() {
+        this.getRewardList();
+    },
+
     getRewardList() {
         wx.showLoading({
             title: '加载中',
@@ -28,6 +32,7 @@ Page({
                     rewardList: res.result.rewardList
                 });
                 wx.hideLoading();
+                wx.stopPullDownRefresh();
             },
             fail: err => {
                 console.error('[云函数] [getRewardList] 调用失败', err)

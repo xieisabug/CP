@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "奖励背包"
+  "navigationBarTitleText": "奖励背包",
+  "enablePullDownRefresh": true
 }

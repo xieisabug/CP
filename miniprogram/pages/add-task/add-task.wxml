@@ -1,9 +1,9 @@
 <!--miniprogram/pages/add-task/add-task.wxml-->
 <view>
-    <view>任务名称</view>
+    <view class="input-label">任务名称</view>
     <input value="{{name}}" bindinput="handleInputName"></input>
 
-    <view>任务奖励</view>
+    <view class="input-label">任务奖励</view>
     <input wx:for="{{rewardList}}" value="{{item}}" data-index="{{index}}" bindinput="handleInputReward"></input>
     <button bindtap="handleAddReward" class="add-reward-button">+</button>
 

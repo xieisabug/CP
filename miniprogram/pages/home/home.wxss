@@ -15,6 +15,7 @@ page {
     flex: 0 0 100rpx;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     padding: 0 40rpx;
     border-bottom: 1rpx solid #ccc;
 }
@@ -27,12 +28,37 @@ page {
 }
 .task-item {
     flex: 0 0 150rpx;
-    border-bottom: 1rpx solid #ccc;
+    border: 1rpx solid #eee;
     background: white;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     padding: 0 40rpx;
+    margin: 20rpx 30rpx;
+    border-radius: 10rpx;
+    font-size: 32rpx;
+}
+.task-item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+}
+.task-item-bottom {
+    margin-top: 20rpx;
+}
+.task-item-left {
+    display: flex;
+    align-items: center;
+
+}
+
+.task-item-rect {
+    width: 50rpx;
+    height: 50rpx;
+    background: rgb(244, 177, 178);
+    display: inline-block;
+    border-radius: 10rpx;
+    margin-right: 20rpx;
 }
 
 .user-head {
@@ -52,11 +78,17 @@ page {
     bottom: 40rpx;
     right: 40rpx;
     border-radius: 50%;
-    background: white;
-    border: 1rpx solid #ccc;
+    background: rgb(244, 177, 178);
+    color: white;
     text-align: center;
+    vertical-align: center;
     line-height: 150rpx;
     opacity: 0.8;
+}
+.add-button-image {
+    width: 75rpx;
+    height: 75rpx;
+    margin-top: 35rpx;
 }
 
 .reward-bag {
@@ -66,4 +98,23 @@ page {
     color: white;
     padding: 10rpx;
     border-radius: 5rpx;
+}
+
+
+.loading-tips {
+    font-size: 32rpx;
+    margin-top: 100rpx;
+    text-align: center;
+}
+
+.bind-cp-tips {
+    font-size: 32rpx;
+    margin-top: 100rpx;
+    text-align: center;
+}
+.bind-cp-button {
+    width: 300rpx;
+    font-size: 32rpx;
+    border: 1rpx solid #ccc;
+    margin-top: 40rpx;
 }

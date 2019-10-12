@@ -1,10 +1,10 @@
 
-var getTaskStatus = function(task) {
+var getTaskStatus = function(task, openid) {
     switch(task.status) {
         case 0:
-            return "等待接受";
+            return openid === task.toOpenId ? "等待您接受" : "等待对方接受";
         case 1:
-            return "进行中";
+            return openid === task.toOpenId ? "您进行中" : "对方进行中";
         default:
             return "";
     }

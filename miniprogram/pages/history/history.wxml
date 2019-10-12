@@ -1,7 +1,10 @@
 <!--miniprogram/pages/history/history.wxml-->
-<view wx:for="{{historyList}}" wx:if="{{historyList.length}}" class="history-item">
-    <view>{{item.name}}</view>
-    <view>{{item.createDate}}</view>
+<wxs src="../../utils/date.wxs" module="date" />
+<wxs src="./history.wxs" module="history" />
+
+<view wx:for="{{historyList}}" wx:if="{{historyList.length}}" class="history-item" wx:key="{{item._id}}">
+    <view>{{date.getDateByDateTimeFmt(item.createDate)}}</view>
+    <view>{{history.getFinishType(item)}}{{item.name}}</view>
 </view>
 
-<view wx:if="{{!historyList.length}}">暂无历史记录</view>
+<view class="history-empty-tips" wx:if="{{!historyList.length}}">暂无完成任务和使用奖励的记录，抓紧吧~</view>

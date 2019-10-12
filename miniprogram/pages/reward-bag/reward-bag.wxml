@@ -6,4 +6,4 @@
 </form>
 
 
-<view wx:if="{{rewardList.length === 0}}">暂无奖励</view>
+<view class="reward-tips" wx:if="{{rewardList.length === 0}}">目前没有获得奖励，快让另一半给你发任务吧~</view>

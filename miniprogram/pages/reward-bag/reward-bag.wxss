@@ -1,1 +1,18 @@
 /* miniprogram/pages/reward-bag/reward-bag.wxss */
+.reward-tips {
+    font-size: 32rpx;
+    margin-top: 100rpx;
+    text-align: center;
+    padding: 0 150rpx;
+}
+
+.reward-item {
+    height: 150rpx;
+    line-height: 150rpx;
+    border-radius: 10rpx;
+    margin: 10rpx 50rpx;
+    background: white;
+    font-size: 32rpx;
+    color: #666;
+    box-shadow:2rpx 2rpx 5rpx #eee;
+}

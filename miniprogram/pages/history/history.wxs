@@ -1,0 +1,14 @@
+var getFinishType = function(history) {
+    switch(history.type) {
+        case "finish-task":
+            return "完成任务：";
+        case "use-reward":
+            return "使用奖励："
+        default:
+            return "";
+    }
+}
+
+module.exports = {
+    getFinishType: getFinishType
+}

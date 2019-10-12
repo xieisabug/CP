@@ -1,24 +1,32 @@
 <!--miniprogram/pages/home/home.wxml-->
 <wxs src="./home.wxs" module="tools" />
 
-<view wx:if="{{!logged}}">
-    <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">登录</button>
-</view>
-<view wx:if="{{logged}}" class="page-container">
+<view class="page-container">
     <view class="top-bar">
-        <image src="{{avatarUrl}}" class="user-head"></image>
-        <view class="nickname">{{nickName}}</view>
         <view class="reward-bag" bindtap="handleGoRewardBag">奖励背包</view>
         <view class="reward-bag" bindtap="handleGoHistory">历史记录</view>
     </view>
     <view class="task-list">
-        <view wx:if="{{!loadCpInfo}}">加载中</view>
-        <button bindtap="handleBindCp" wx:if="{{loadCpInfo && !cpInfo}}">绑定cp</button>
+        <view class="loading-tips" wx:if="{{!loadCpInfo}}">加载中...</view>
+        <view class="bind-cp-tips" wx:if="{{loadCpInfo && !cpInfo}}">您暂时还没有CP</view>
+        <button class="bind-cp-button" bindtap="handleBindCp" wx:if="{{loadCpInfo && !cpInfo}}">绑定cp</button>
         <view wx:if="{{loadCpInfo && cpInfo}}" class="task-item" wx:for="{{taskList}}" wx:for-item="task" wx:key="{{task._id}}" data-task="{{task}}" bindtap="handleTaskClick">
-            <view>{{task.name}}</view>
-            <view>{{tools.getTaskStatus(task)}}</view>
+            <view class="task-item-top">
+                <view class="task-item-left">
+                    <view class="task-item-rect"></view>
+                    <text>{{task.name}}</text>
+                </view>
+                <view>{{tools.getTaskStatus(task, openid)}}</view>
+            </view>
+            <view class="task-item-bottom">
+                <view>
+                    奖励: <text wx:for="{{task.rewardList}}" wx:for-item="reward" wx:key>{{reward}} </text>
+                </view>
+            </view>
         </view>
     </view>
 
-    <view wx:if="{{loadCpInfo && cpInfo}}" class="add-button" bindtap="handleAdd">新增</view>
+    <view wx:if="{{loadCpInfo && cpInfo}}" class="add-button" bindtap="handleAdd">
+        <image src="../../images/task.svg" class="add-button-image"></image>
+    </view>
 </view>

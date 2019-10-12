@@ -1,7 +1,10 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init({
+    // API 调用都保持和云函数当前所在环境一致
+    env: cloud.DYNAMIC_CURRENT_ENV
+})
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -16,8 +19,17 @@ exports.main = async (event, context) => {
             status: 1
         }
     });
-    // let rewardData = await rewardDocument.get();
+    let rewardData = await rewardDocument.get();
     console.log(updateInfo);
+
+    await db.collection("history").add({
+        data: {
+            openId: wxContext.OPENID,
+            type: "use-reward",
+            name: rewardData.data.name,
+            createDate: new Date()
+        }
+    })
 
     // const cpInfo = await db.collection("cpInfo").where(_.or([
     //     { "user1": wxContext.OPENID },

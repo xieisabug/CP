@@ -2,17 +2,34 @@
 page {
     background: white;
 }
+.input-label {
+    height: 100rpx;
+    line-height: 100rpx;
+    margin-left: 50rpx;
+    font-size: 32rpx;
+}
 input {
     border: 1rpx solid #ccc;
     padding: 10rpx;
-    margin: 10rpx;
+    margin: 0 50rpx 10rpx;
     background: white;
     border-radius: 10rpx;
+    
 }
 
 .add-reward-button {
+    width: 200rpx;
+    height: 80rpx;
+    line-height: 80rpx;
     margin-bottom: 140rpx;
-    background: white;
+    background: rgb(244, 177, 178);
+    color: white;
+    border-radius: 0;
+    margin-top: 50rpx;
+}
+.add-reward-button:after {
+    border: none;
+    outline: none;
 }
 
 .confirm-button {
@@ -20,8 +37,14 @@ input {
     bottom: 0;
     height: 100rpx;
     width: 100%;
-    background: white;
-    border-top: 1rpx solid #ccc;
+    background: rgb(244, 177, 178);
+    color: white;
     line-height: 100rpx;
-    font-size: 30rpx;
+    font-size: 32rpx;
+    border-radius: 0;
+    z-index: 9999;
+}
+.confirm-button:after {
+    border: none;
+    outline: none;
 }
