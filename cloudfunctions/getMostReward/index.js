@@ -8,16 +8,20 @@ cloud.init({
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-    const wxContext = cloud.getWXContext()
-
+    const wxContext = cloud.getWXContext();
     const db = cloud.database();
-    const _ = db.command;
 
-    const historyList = await db.collection("history").where({
+    const mostReward = await db.collection("mostReward").where({
         openId: wxContext.OPENID
-    }).orderBy('createDate', 'desc').get();
+    }).get();
 
-    return {
-        historyList: historyList.data
+    if (mostReward.data.length) {
+        return {
+            mostReward: mostReward.data[0].rewardList
+        }
+    } else {
+        return {
+            mostReward: []
+        }
     }
 }

@@ -33,6 +33,31 @@ exports.main = async (event, context) => {
             }
         });
 
+        const mostReward = await db.collection("mostReward").where({
+            openId: wxContext.OPENID
+        }).get();
+        if (mostReward && mostReward.data.length) {
+            let rewardList = mostReward.data[0].rewardList;
+            if (event.rewardList.length > 3) {
+                rewardList = event.rewardList.slice(0, 3);
+            } else {
+                rewardList = event.rewardList.concat(rewardList.slice(0, 3 - event.rewardList.length));
+            }
+
+            await db.collection("mostReward").doc(mostReward.data[0]._id).update({
+                data: {
+                    rewardList
+                }
+            });
+        } else {
+            await db.collection("mostReward").add({
+                data: {
+                    openId: wxContext.OPENID,
+                    rewardList: event.rewardList.slice(0, 3)
+                }
+            })
+        }
+
         console.log(addInfo);
         return {
             success: true

@@ -1,10 +1,19 @@
 <!--miniprogram/pages/add-task/add-task.wxml-->
 <view>
     <view class="input-label">任务名称</view>
-    <input value="{{name}}" bindinput="handleInputName"></input>
+    <input class="input-name" value="{{name}}" bindinput="handleInputName"></input>
 
     <view class="input-label">任务奖励</view>
-    <input wx:for="{{rewardList}}" value="{{item}}" data-index="{{index}}" bindinput="handleInputReward"></input>
+    <view wx:for="{{rewardList}}" class="input-reward-container" wx:key>
+        <input class="input-reward" value="{{item}}" data-index="{{index}}" bindinput="handleInputReward"></input>
+        <button class="input-reward-button" data-index="{{index}}" bindtap="handleInputRewardButtonClick">x</button>
+    </view>
+    
+
+    <view class="most-reward-tips" wx:if="{{mostReward.length}}">最近使用奖励：</view>
+    <view class="most-reward-container" wx:if="{{mostReward.length}}">
+        <view class="most-reward-item" wx:for="{{mostReward}}" data-reward="{{item}}" bindtap="handleMostRewardItemClick" wx:key>{{item}}</view>
+    </view>
     <button bindtap="handleAddReward" class="add-reward-button">+</button>
 
     <button bindtap="handleConfirmTask" class="confirm-button" >发送任务</button>

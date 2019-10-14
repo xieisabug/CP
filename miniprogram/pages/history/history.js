@@ -28,10 +28,15 @@ Page({
                     historyList: res.result.historyList
                 });
                 wx.hideLoading();
+                wx.stopPullDownRefresh();
             },
             fail: err => {
                 console.error('[云函数] [getHistoryList] 调用失败', err)
             }
         })
+    },
+
+    onPullDownRefresh() {
+        this.getHistoryList();
     }
 })
